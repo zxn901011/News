@@ -3,10 +3,8 @@ package com.zxn.news.utils;
 import android.content.Context;
 
 /**
- * 作者：尚硅谷-杨光福 on 2016/7/25 11:58
- * 微信：yangguangfu520
- * QQ号：541433511
- * 作用：xxxx
+ * 作者：zxn
+ * 屏幕适配
  */
 public class DensityUtil {
     /**
