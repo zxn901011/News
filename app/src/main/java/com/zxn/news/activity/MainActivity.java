@@ -19,6 +19,7 @@ public final class MainActivity extends SlidingFragmentActivity {
     private FrameLayout fl_content;
     private FrameLayout fl_left;
     private int screenWidth;
+    private FragmentManager manager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,10 +52,21 @@ public final class MainActivity extends SlidingFragmentActivity {
     }
 
     private void initFragment() {
-        FragmentManager manager=getSupportFragmentManager();
+        manager=getSupportFragmentManager();
         FragmentTransaction ft=manager.beginTransaction();
         ft.replace(R.id.fl_content,new ContentFragment(),MAIN_CONTENT_TAG);//主页布局
         ft.replace(R.id.fl_left,new LeftMenuFragment(),LEFT_MENU_TAG);//左侧布局
         ft.commit();
+    }
+
+    public LeftMenuFragment getLeftMemuFragment() {
+        manager=getSupportFragmentManager();
+        LeftMenuFragment leftMenuFragment= (LeftMenuFragment) manager.findFragmentByTag(LEFT_MENU_TAG);
+        return leftMenuFragment;
+    }
+
+    public ContentFragment getContentFragment() {
+        manager=getSupportFragmentManager();
+        return (ContentFragment) manager.findFragmentByTag(MAIN_CONTENT_TAG);
     }
 }

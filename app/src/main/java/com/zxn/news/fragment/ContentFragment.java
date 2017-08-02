@@ -67,6 +67,11 @@ public final class ContentFragment extends BaseFragment {
         setSlingMenuEnable(SlidingMenu.TOUCHMODE_NONE);
     }
 
+    public NewsContentPager getNewsCenterPager() {
+        NewsContentPager newsContentPager= (NewsContentPager) basePagers.get(1);
+        return newsContentPager;
+    }
+
     class MyOnCheckedChangeListener implements RadioGroup.OnCheckedChangeListener {
         @Override
         public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {

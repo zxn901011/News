@@ -7,6 +7,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.zxn.news.R;
+import com.zxn.news.activity.MainActivity;
 
 /**
  * 作者：zxn
@@ -56,6 +57,13 @@ public class BasePager{
         View view=View.inflate(context, R.layout.base_pager,null);
         tv_title= (TextView) view.findViewById(R.id.tv_title);
         ib_menu= (ImageButton) view.findViewById(R.id.ib_menu);
+        ib_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity= (MainActivity) context;
+                activity.getSlidingMenu().toggle();
+            }
+        });
         fl_base_pager= (FrameLayout) view.findViewById(R.id.fl_base_pager);
         return view;
     }
