@@ -13,7 +13,7 @@ import com.zxn.news.base.BasePager;
  * 热点
  */
 
-public class HomePager extends BasePager {
+public final class HomePager extends BasePager {
     public HomePager(Context context) {
         super(context);
     }

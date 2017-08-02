@@ -12,13 +12,12 @@ import com.zxn.news.R;
 import com.zxn.news.fragment.ContentFragment;
 import com.zxn.news.fragment.LeftMenuFragment;
 
-public class MainActivity extends SlidingFragmentActivity {
+public final class MainActivity extends SlidingFragmentActivity {
 
     private static final String MAIN_CONTENT_TAG = "main_content_tag";
     private static final String LEFT_MENU_TAG = "left_menu_tag";
     private FrameLayout fl_content;
     private FrameLayout fl_left;
-
     private int screenWidth;
 
     @Override

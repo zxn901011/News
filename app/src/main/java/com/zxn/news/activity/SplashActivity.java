@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import com.zxn.news.R;
 import com.zxn.news.utils.CacheUtils;
 
-public class SplashActivity extends AppCompatActivity {
+public final class SplashActivity extends AppCompatActivity {
 
     public static final String START_MAIN = "start_main";
     private static final String TAG =SplashActivity.class.getSimpleName();

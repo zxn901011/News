@@ -9,7 +9,7 @@ import org.xutils.x;
  * 作用：应用的初始化
  */
 
-public class MyApplication extends Application {
+public final class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();

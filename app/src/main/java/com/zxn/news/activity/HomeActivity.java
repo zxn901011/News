@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import com.zxn.news.R;
 
 
-public class HomeActivity extends AppCompatActivity {
+public final class HomeActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     @Override

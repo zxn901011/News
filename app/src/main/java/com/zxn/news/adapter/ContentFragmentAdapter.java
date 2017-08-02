@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by zxn on 2017-08-02.
  */
-public class ContentFragmentAdapter extends PagerAdapter {
+public final class ContentFragmentAdapter extends PagerAdapter {
     private final ArrayList<BasePager> basePagers;
 
     public ContentFragmentAdapter(ArrayList<BasePager> basePagers){
@@ -28,7 +28,7 @@ public class ContentFragmentAdapter extends PagerAdapter {
         BasePager basePager = basePagers.get(position);//各个页面的实例
         View rootView = basePager.rootView;//各个子页面
         //调用各个页面的initData()
-        basePager.initData();//初始化数据
+//        basePager.initData();//初始化数据
         container.addView(rootView);
         return rootView;
     }

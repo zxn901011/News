@@ -6,7 +6,7 @@ import android.content.Context;
  * 作者：zxn
  * 屏幕适配
  */
-public class DensityUtil {
+public final class DensityUtil {
     /**
      * 根据手机的分辨率从 dip 的单位 转成为 px(像素)
      */

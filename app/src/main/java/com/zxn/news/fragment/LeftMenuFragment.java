@@ -12,7 +12,7 @@ import com.zxn.news.utils.LogUtil;
  * 作者:zxn
  * 作用：左侧菜单的Fragment
  */
-public class LeftMenuFragment extends BaseFragment {
+public final class LeftMenuFragment extends BaseFragment {
 
     private TextView textView;
     @Override

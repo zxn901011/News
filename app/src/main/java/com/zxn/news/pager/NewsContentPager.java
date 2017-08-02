@@ -13,7 +13,7 @@ import com.zxn.news.base.BasePager;
  * 新闻
  */
 
-public class NewsContentPager extends BasePager {
+public final class NewsContentPager extends BasePager {
     public NewsContentPager(Context context) {
         super(context);
     }

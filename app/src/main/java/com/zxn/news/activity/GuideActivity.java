@@ -17,7 +17,7 @@ import com.zxn.news.utils.DensityUtil;
 
 import java.util.ArrayList;
 
-public class GuideActivity extends Activity {
+public final class GuideActivity extends Activity {
 
     public static final String BTN_MODE = "btn_mode";
     private ViewPager viewpager;
@@ -27,6 +27,8 @@ public class GuideActivity extends Activity {
     private ArrayList<ImageView> imageviews;
     private int prePosition = 0;
     private Intent intent;
+    private ImageView imageview;
+    private ImageView point;
 
 
     @Override
@@ -46,10 +48,10 @@ public class GuideActivity extends Activity {
 
         imageviews = new ArrayList<>();
         for (int i = 0; i < ids.length; i++) {
-            ImageView imageview = new ImageView(this);
+            imageview = new ImageView(this);
             imageview.setBackgroundResource(ids[i]);
             imageviews.add(imageview);
-            ImageView point = new ImageView(this);
+            point = new ImageView(this);
             point.setBackgroundResource(R.drawable.point_color_selector);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DensityUtil.dip2px(this, 10), DensityUtil.dip2px(this, 10));
             if (i == 0) {

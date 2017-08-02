@@ -21,13 +21,13 @@ public class CacheUtils {
 
     public static void putBoolean(Context context, String key, boolean value) {
         SharedPreferences preferences=context.getSharedPreferences("zxn",Context.MODE_PRIVATE);
-        preferences.edit().putBoolean(key,value).commit();
+        preferences.edit().putBoolean(key,value).apply();
 
     }
 
     public static void putInt(Context context, String key, int value) {
         SharedPreferences preferences=context.getSharedPreferences("zxn",Context.MODE_PRIVATE);
-        preferences.edit().putInt(key,value).commit();
+        preferences.edit().putInt(key,value).apply();
     }
 
     public static int getInt(Context context,String key) {

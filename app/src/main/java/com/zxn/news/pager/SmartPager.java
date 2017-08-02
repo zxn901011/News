@@ -13,7 +13,7 @@ import com.zxn.news.base.BasePager;
  * 智慧
  */
 
-public class SmartPager extends BasePager {
+public final class SmartPager extends BasePager {
     public SmartPager(Context context) {
         super(context);
     }
