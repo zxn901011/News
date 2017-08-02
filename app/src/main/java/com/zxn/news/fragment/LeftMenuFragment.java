@@ -138,5 +138,4 @@ public final class LeftMenuFragment extends BaseFragment {
     static class ViewHolder{
         TextView textview;
     }
-
 }

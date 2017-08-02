@@ -41,7 +41,6 @@ public class BasePager{
      */
     public ImageButton ib_menu;
     public FrameLayout fl_base_pager;
-    public boolean isInitData;
 
     public BasePager(Context context) {
         this.context = context;
@@ -67,8 +66,6 @@ public class BasePager{
         fl_base_pager= (FrameLayout) view.findViewById(R.id.fl_base_pager);
         return view;
     }
-
-
 
     /**
      * 当子页面，需要绑定数据，或者联网请求数据并且绑定的时候，重写该方法
