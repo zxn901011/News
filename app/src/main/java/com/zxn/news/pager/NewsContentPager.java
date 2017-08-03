@@ -1,6 +1,7 @@
 package com.zxn.news.pager;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -14,6 +15,7 @@ import com.zxn.news.menudetailpager.NewsMenuDetailPager;
 import com.zxn.news.menudetailpager.PhotosMenuDetailPager;
 import com.zxn.news.menudetailpager.TopicMenuDetailPager;
 import com.zxn.news.menudetailpager.TouPiaoMenuDetailPager;
+import com.zxn.news.utils.CacheUtils;
 import com.zxn.news.utils.ConstantUtils;
 import com.zxn.news.utils.LogUtil;
 
@@ -56,6 +58,11 @@ public final class NewsContentPager extends BasePager {
 //        fl_base_pager.addView(textView);
 //        textView.setText("我是新闻的内容");
         //联网请求数据用xutils3
+        String result=CacheUtils.getString(context,ConstantUtils.NEWS_CENTER_URL);
+        if (!TextUtils.isEmpty(result)){
+            parseData(result);
+        }
+        //联网请求数据，运行两次
         getDataFromNet();
     }
 
@@ -64,9 +71,11 @@ public final class NewsContentPager extends BasePager {
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                LogUtil.e("使用xutils3联网请求成功"+result);
-                //设置适配器
+//                LogUtil.e("使用xutils3联网请求成功"+result);
+                //数据缓存
+                CacheUtils.putString(context,ConstantUtils.NEWS_CENTER_URL,result);
                 parseData(result);
+                //设置适配器
             }
 
             @Override
@@ -95,7 +104,7 @@ public final class NewsContentPager extends BasePager {
         mainActivity= (MainActivity) context;
         LeftMenuFragment leftMenuFragment=mainActivity.getLeftMemuFragment();
         menuDetailBasePagers=new ArrayList<>();
-        menuDetailBasePagers.add(new NewsMenuDetailPager(context));
+        menuDetailBasePagers.add(new NewsMenuDetailPager(context,datas.get(0)));
         menuDetailBasePagers.add(new TopicMenuDetailPager(context));
         menuDetailBasePagers.add(new PhotosMenuDetailPager(context));
         menuDetailBasePagers.add(new InteractMenuDetailPager(context));

@@ -28,7 +28,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.3.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile project(':library')
+    compile project(':SlidingMenu_library')
     compile project(':xutils')
     compile 'com.google.code.gson:gson:2.8.1'
+    compile project(':ViewPagerIndicator_library')
+    compile files('libs/glide-3.7.0.jar')
 }

@@ -114,22 +114,10 @@ public final class ContentFragment extends BaseFragment {
         }
         @Override
         public void onPageSelected(int position) {
-//            if (position==0){
-//                rgContentBottom.check(R.id.rb_home);
-//            }else if (position==1){
-//                rgContentBottom.check(R.id.rb_news_center);
-//            }else if (position==2){
-//                rgContentBottom.check(R.id.rb_smart_service);
-//            }else if (position==3){
-//                rgContentBottom.check(R.id.rb_govaf_fair);
-//            }else if (position==4){
-//                rgContentBottom.check(R.id.rb_setting);
-//            }
             basePagers.get(position).initData();//各个页面的实例
         }
         @Override
         public void onPageScrollStateChanged(int state) {
-
         }
     }
 }
