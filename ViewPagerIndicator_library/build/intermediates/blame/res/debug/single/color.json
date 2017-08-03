@@ -1,10 +1,10 @@
 [
     {
-        "merged": "E:\\download\\News\\ViewPagerIndicator_library\\build\\intermediates\\res\\merged\\debug\\color\\vpi__dark_theme.xml",
-        "source": "E:\\download\\News\\ViewPagerIndicator_library\\src\\main\\res\\color\\vpi__dark_theme.xml"
+        "merged": "/Users/zhangxuening/androidProject/News/ViewPagerIndicator_library/build/intermediates/res/merged/debug/color/vpi__dark_theme.xml",
+        "source": "/Users/zhangxuening/androidProject/News/ViewPagerIndicator_library/src/main/res/color/vpi__dark_theme.xml"
     },
     {
-        "merged": "E:\\download\\News\\ViewPagerIndicator_library\\build\\intermediates\\res\\merged\\debug\\color\\vpi__light_theme.xml",
-        "source": "E:\\download\\News\\ViewPagerIndicator_library\\src\\main\\res\\color\\vpi__light_theme.xml"
+        "merged": "/Users/zhangxuening/androidProject/News/ViewPagerIndicator_library/build/intermediates/res/merged/debug/color/vpi__light_theme.xml",
+        "source": "/Users/zhangxuening/androidProject/News/ViewPagerIndicator_library/src/main/res/color/vpi__light_theme.xml"
     }
 ]
