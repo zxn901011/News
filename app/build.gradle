@@ -33,4 +33,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.1'
     compile project(':ViewPagerIndicator_library')
     compile files('libs/glide-3.7.0.jar')
+    compile project(':RefreshListView_library')
+    compile project(':PullToRefresh_library')
 }

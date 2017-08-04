@@ -17,7 +17,7 @@ import com.zxn.news.utils.DensityUtil;
 
 import java.util.ArrayList;
 
-public final class GuideActivity extends Activity {
+public class GuideActivity extends Activity {
 
     public static final String BTN_MODE = "btn_mode";
     private ViewPager viewpager;

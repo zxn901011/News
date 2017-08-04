@@ -22,7 +22,7 @@ import java.util.List;
  * 作者:zxn
  * 作用：左侧菜单的Fragment
  */
-public final class LeftMenuFragment extends BaseFragment {
+public class LeftMenuFragment extends BaseFragment {
 
     private List<NewsBean.DataEntity> datas;
     private View view;
@@ -104,38 +104,21 @@ public final class LeftMenuFragment extends BaseFragment {
 
         @Override
         public Object getItem(int position) {
-            return datas.get(position);
+            return null;
         }
 
         @Override
         public long getItemId(int position) {
-            return position;
+            return 0;
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
-            if (convertView==null){
-                convertView=View.inflate(context,R.layout.item_left_menu,null);
-                holder=new ViewHolder();
-                holder.textview= (TextView) convertView.findViewById(R.id.tv_left_title);
-                convertView.setTag(holder);
-            }else {
-                holder= (ViewHolder) convertView.getTag();
-            }
-            setViewData(position,convertView,holder);
-            return holder.textview;
+            TextView textView= (TextView) View.inflate(context,R.layout.item_left_menu,null);
+            textView.setText(datas.get(position).getTitle());
+            textView.setEnabled(position==prePosition);
+            return textView;
         }
 
-        private void setViewData(int position, View convertView, ViewHolder holder) {
-            holder.textview.setText(datas.get(position).getTitle());
-            if (position==prePosition){
-                holder.textview.setEnabled(true);
-            }else {
-                holder.textview.setEnabled(false);
-            }
-        }
     }
-    static class ViewHolder{
-        TextView textview;
-    }
+
 }

@@ -9,13 +9,13 @@ import android.view.MotionEvent;
  * Created by zxn on 2017-08-02.
  */
 
-public final class NoScrollViewPager extends ViewPager{
+public class NoScrollViewPager extends ViewPager{
     /**
      * 通常在代码中实例化的时候用该方法
      * @param context
      */
     public NoScrollViewPager(Context context) {
-        this(context,null);
+        super(context);
     }
 
     /**

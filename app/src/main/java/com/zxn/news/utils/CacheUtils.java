@@ -34,7 +34,7 @@ public class CacheUtils {
      */
     public static void putBoolean(Context context, String key, boolean value) {
         SharedPreferences preferences=context.getSharedPreferences("zxn",Context.MODE_PRIVATE);
-        preferences.edit().putBoolean(key,value).apply();
+        preferences.edit().putBoolean(key,value).commit();
 
     }
 
@@ -46,7 +46,7 @@ public class CacheUtils {
      */
     public static void putInt(Context context, String key, int value) {
         SharedPreferences preferences=context.getSharedPreferences("zxn",Context.MODE_PRIVATE);
-        preferences.edit().putInt(key,value).apply();
+        preferences.edit().putInt(key,value).commit();
     }
 
     /**
@@ -69,7 +69,7 @@ public class CacheUtils {
      */
     public static void putString(Context context, String key, String value) {
         SharedPreferences preferences=context.getSharedPreferences("zxn",Context.MODE_PRIVATE);
-        preferences.edit().putString(key,value).apply();
+        preferences.edit().putString(key,value).commit();
     }
 
     /**

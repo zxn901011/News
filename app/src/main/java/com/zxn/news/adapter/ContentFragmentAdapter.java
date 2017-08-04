@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by zxn on 2017-08-02.
  */
-public final class ContentFragmentAdapter extends PagerAdapter {
+public class ContentFragmentAdapter extends PagerAdapter {
     private final ArrayList<BasePager> basePagers;
 
     public ContentFragmentAdapter(ArrayList<BasePager> basePagers){

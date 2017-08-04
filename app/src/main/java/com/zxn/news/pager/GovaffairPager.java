@@ -13,7 +13,7 @@ import com.zxn.news.base.BasePager;
  * 政要
  */
 
-public final class GovaffairPager extends BasePager {
+public class GovaffairPager extends BasePager {
     public GovaffairPager(Context context) {
         super(context);
     }

@@ -13,7 +13,7 @@ import com.zxn.news.base.BasePager;
  * 设置
  */
 
-public final class SettingPager extends BasePager {
+public class SettingPager extends BasePager {
     public SettingPager(Context context) {
         super(context);
     }

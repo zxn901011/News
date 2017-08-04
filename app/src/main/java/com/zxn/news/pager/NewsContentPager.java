@@ -31,7 +31,7 @@ import java.util.List;
  * 新闻
  */
 
-public final class NewsContentPager extends BasePager {
+public class NewsContentPager extends BasePager {
     private RequestParams params;
     private NewsBean bean;
     private List<NewsBean.DataEntity> datas;
@@ -105,7 +105,7 @@ public final class NewsContentPager extends BasePager {
         LeftMenuFragment leftMenuFragment=mainActivity.getLeftMemuFragment();
         menuDetailBasePagers=new ArrayList<>();
         menuDetailBasePagers.add(new NewsMenuDetailPager(context,datas.get(0)));
-        menuDetailBasePagers.add(new TopicMenuDetailPager(context));
+        menuDetailBasePagers.add(new TopicMenuDetailPager(context,datas.get(0)));
         menuDetailBasePagers.add(new PhotosMenuDetailPager(context));
         menuDetailBasePagers.add(new InteractMenuDetailPager(context));
         menuDetailBasePagers.add(new TouPiaoMenuDetailPager(context));

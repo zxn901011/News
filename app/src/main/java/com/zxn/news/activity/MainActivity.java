@@ -13,7 +13,7 @@ import com.zxn.news.R;
 import com.zxn.news.fragment.ContentFragment;
 import com.zxn.news.fragment.LeftMenuFragment;
 
-public final class MainActivity extends SlidingFragmentActivity {
+public class MainActivity extends SlidingFragmentActivity {
 
     private static final String MAIN_CONTENT_TAG = "main_content_tag";
     private static final String LEFT_MENU_TAG = "left_menu_tag";

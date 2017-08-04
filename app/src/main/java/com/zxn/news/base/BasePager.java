@@ -56,6 +56,7 @@ public class BasePager{
         View view=View.inflate(context, R.layout.base_pager,null);
         tv_title= (TextView) view.findViewById(R.id.tv_title);
         ib_menu= (ImageButton) view.findViewById(R.id.ib_menu);
+        fl_base_pager= (FrameLayout) view.findViewById(R.id.fl_base_pager);
         ib_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +64,6 @@ public class BasePager{
                 activity.getSlidingMenu().toggle();
             }
         });
-        fl_base_pager= (FrameLayout) view.findViewById(R.id.fl_base_pager);
         return view;
     }
 

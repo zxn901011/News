@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /**
  * 作者：zxn
  */
-public final class ContentFragment extends BaseFragment {
+public class ContentFragment extends BaseFragment {
 
 
     private NoScrollViewPager contentViewpager;
@@ -57,12 +57,13 @@ public final class ContentFragment extends BaseFragment {
         basePagers.add(new SmartPager(context));
         basePagers.add(new GovaffairPager(context));
         basePagers.add(new SettingPager(context));
-        rgContentBottom.check(R.id.rb_home);
+
         contentViewpager.setAdapter(new ContentFragmentAdapter(basePagers));
         //设置RadioGroup的选中状态改变的监听
         rgContentBottom.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
         //监听我们的页面改变
         contentViewpager.addOnPageChangeListener(new MyOnPageChangeListener());
+        rgContentBottom.check(R.id.rb_home);
         basePagers.get(0).initData();
         setSlingMenuEnable(SlidingMenu.TOUCHMODE_NONE);
     }
