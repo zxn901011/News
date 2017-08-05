@@ -144,7 +144,7 @@ public class NewsContentPager extends BasePager {
         menuDetailBasePagers=new ArrayList<>();
         menuDetailBasePagers.add(new NewsMenuDetailPager(context,datas.get(0)));
         menuDetailBasePagers.add(new TopicMenuDetailPager(context,datas.get(0)));
-        menuDetailBasePagers.add(new PhotosMenuDetailPager(context));
+        menuDetailBasePagers.add(new PhotosMenuDetailPager(context,datas.get(2)));
         menuDetailBasePagers.add(new InteractMenuDetailPager(context));
         menuDetailBasePagers.add(new TouPiaoMenuDetailPager(context));
         //给左侧菜单传递数据
@@ -170,5 +170,20 @@ public class NewsContentPager extends BasePager {
         detailBasePager.initData();
         View view=detailBasePager.rootView;
         fl_base_pager.addView(view);
+
+        if (position==2){
+            //图组详情页面
+            ib_switch_list_grid.setVisibility(View.VISIBLE);
+            ib_switch_list_grid.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //1.得到图组的页面
+                    PhotosMenuDetailPager photosMenuDetailPager= (PhotosMenuDetailPager) menuDetailBasePagers.get(2);
+                    photosMenuDetailPager.switchListToGrid(ib_switch_list_grid);
+                }
+            });
+        }else {
+            ib_switch_list_grid.setVisibility(View.GONE);
+        }
     }
 }

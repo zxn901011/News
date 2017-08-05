@@ -1,6 +1,7 @@
 package com.zxn.news.menudetailpager;
 
 import android.content.Context;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.viewpagerindicator.TabPageIndicator;
 import com.zxn.news.R;
 import com.zxn.news.activity.MainActivity;
 import com.zxn.news.base.MenuDetailBasePager;
@@ -32,8 +32,8 @@ public class TopicMenuDetailPager extends MenuDetailBasePager {
     //xutils加载布局
     @ViewInject(R.id.view_pager)
     private ViewPager view_pager;
-    @ViewInject(R.id.tpi_tab)
-    private TabPageIndicator tpi_tab;
+    @ViewInject(R.id.tab_layout)
+    private TabLayout tab_layout;
     @ViewInject(R.id.iv_tpi_select_next)
     private ImageButton iv_tpi_select_next;
     /**
@@ -75,8 +75,12 @@ public class TopicMenuDetailPager extends MenuDetailBasePager {
         //设置ViewPager的适配器
         view_pager.setAdapter(new MyNewsMenuDetailPagerAdapter());
         //viewpager和TabPagerIndicator关联起来
-        tpi_tab.setViewPager(view_pager);
-        tpi_tab.setOnPageChangeListener(new MyOnPageChangeListener());
+        tab_layout.setupWithViewPager(view_pager);
+//        tab_layout.setOnPageChangeListener(new MyOnPageChangeListener());
+        view_pager.addOnPageChangeListener(new MyOnPageChangeListener());
+        //设置滑动或者固定
+//        tab_layout.setTabMode(TabLayout.MODE_FIXED);//设置成这种样式就会导致没法显示，因为太密集了
+        tab_layout.setTabMode(TabLayout.MODE_SCROLLABLE);
         view_pager.setCurrentItem(tempPosition);
     }
     class MyNewsMenuDetailPagerAdapter extends PagerAdapter {

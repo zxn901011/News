@@ -60,7 +60,6 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
         });
         return view;
     }
-
     @Override
     public void initData() {
         super.initData();
