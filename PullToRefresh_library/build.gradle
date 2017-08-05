@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+//自定义库
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.3'
