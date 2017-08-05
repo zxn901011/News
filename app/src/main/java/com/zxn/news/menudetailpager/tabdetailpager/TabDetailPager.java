@@ -1,11 +1,17 @@
 package com.zxn.news.menudetailpager.tabdetailpager;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.zxn.news.R;
+import com.zxn.news.activity.NewsWebActivity;
 import com.zxn.news.base.MenuDetailBasePager;
 import com.zxn.news.bean.NewsBean;
 import com.zxn.news.bean.TabDetailPagerBean;
@@ -41,6 +48,7 @@ import java.util.List;
 
 public class TabDetailPager extends MenuDetailBasePager {
     private static final String CHILDREN_DATA_URL = "children_data_url";
+    public static final String READ_ARRAY_ID = "read_array_id";
     private final NewsBean.DataEntity.ChildrenData childrenData;
     private final ImageOptions imageOptions;
     private String url;
@@ -63,6 +71,7 @@ public class TabDetailPager extends MenuDetailBasePager {
      */
     private String moreUrl;
     private boolean isLoadMore=false;
+    private InternalHandler handler;
 
 
     public TabDetailPager(Context context, NewsBean.DataEntity.ChildrenData childrenData) {
@@ -91,6 +100,8 @@ public class TabDetailPager extends MenuDetailBasePager {
         lv_news_content.addTopNewsView(topNewsView);
         //设置listview的下拉刷新监听事件
         lv_news_content.setOnRefreshListenenr(new MyOnRefreshListener());
+        //设置listview的点击监听
+        lv_news_content.setOnItemClickListener(new MyItemClickListener());
         return view;
     }
 
@@ -142,6 +153,34 @@ public class TabDetailPager extends MenuDetailBasePager {
             adapter.notifyDataSetChanged();
         }
 
+        //发消息每隔3秒，切换一次viewpager页面
+        if (handler==null) {
+            handler = new InternalHandler();
+        }
+        //是把消息队列中所有消息和回调移除
+        handler.removeCallbacksAndMessages(null);
+        //是3秒后执行这个MyRunnable中的run方法
+        handler.postDelayed(new MyRunnable(),3000);//可以发任务
+    }
+
+    class MyRunnable implements Runnable {
+        @Override
+        public void run() {
+            handler.sendEmptyMessage(0);
+        }
+    }
+    /**
+     * 自定义一个Handler类
+     */
+    class InternalHandler extends Handler{
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            //切换viewpager的下一个页面
+            int item=(view_pager.getCurrentItem()+1)%topnewsDataList.size();
+            view_pager.setCurrentItem(item);
+            handler.sendEmptyMessageDelayed(0,3000);
+        }
     }
 
     private void addPoint() {
@@ -222,6 +261,23 @@ public class TabDetailPager extends MenuDetailBasePager {
             TabDetailPagerBean.DataEntity.TopnewsData topnewsData = topnewsDataList.get(position);
             String imageUrl = ConstantUtils.BASE_URL + topnewsData.getTopimage();
             x.image().bind(imageView, imageUrl, imageOptions);//联网请求图片
+            imageView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()){
+                        case MotionEvent.ACTION_DOWN:
+                            handler.removeCallbacksAndMessages(null);
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            handler.removeCallbacksAndMessages(null);
+                            handler.sendEmptyMessageDelayed(0,1000);
+                            break;
+                    }
+                    return true;
+                }
+            });
             return imageView;
         }
 
@@ -249,8 +305,26 @@ public class TabDetailPager extends MenuDetailBasePager {
             prePosition = position;
         }
 
+        private boolean isDragging=false;
         @Override
         public void onPageScrollStateChanged(int state) {
+            if(state==ViewPager.SCROLL_STATE_DRAGGING){//拖拽
+                isDragging=true;
+                LogUtil.e("拖拽");
+                //拖拽时移除消息
+                handler.removeCallbacksAndMessages(null);
+            }else if (state==ViewPager.SCROLL_STATE_SETTLING&&isDragging){//惯性
+                //发消息
+                isDragging=false;
+                LogUtil.e("惯性");
+                handler.removeCallbacksAndMessages(null);
+                handler.sendEmptyMessageDelayed(0,3000);
+            }else if (state==ViewPager.SCROLL_STATE_IDLE&&isDragging){//静止
+                isDragging=false;
+                LogUtil.e("静止");
+                handler.removeCallbacksAndMessages(null);
+                handler.sendEmptyMessageDelayed(0,3000);
+            }
         }
     }
 
@@ -294,12 +368,20 @@ public class TabDetailPager extends MenuDetailBasePager {
 
             holder.tv_desc.setText(newsData.getTitle());
             holder.tv_date.setText(newsData.getPubdate());
+
+            String idArray=CacheUtils.getString(context,READ_ARRAY_ID);
+            if (idArray.contains(newsData.getId()+"")){
+                //设置灰色
+                holder.tv_desc.setTextColor(Color.GRAY);
+            }else {
+                //还原成黑色
+                holder.tv_desc.setTextColor(Color.BLACK);
+            }
             return convertView;
         }
     }
 
     static class ViewHolder {
-
         ImageView iv_news_image;
         TextView tv_desc;
         TextView tv_date;
@@ -354,4 +436,25 @@ public class TabDetailPager extends MenuDetailBasePager {
         });
     }
 
+    class MyItemClickListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            int realPosition=position-1;
+            TabDetailPagerBean.DataEntity.NewsData newsData = news.get(realPosition);
+//            Toast.makeText(context,"newsData==id"+newsData.getId()+"newsData==title"+newsData.getTitle(),Toast.LENGTH_SHORT).show();
+            LogUtil.e("newsData==id"+newsData.getId()+"newsData==title"+newsData.getTitle()+"newsData==url"+newsData.getUrl());
+            //1.取出保存的id集合
+            String idArray=CacheUtils.getString(context, READ_ARRAY_ID);//第一次进来啥也没有，是一个""!!!
+            //2.判断是否存在，如果不存在，才保存，并且刷新适配器
+            if (!idArray.contains(newsData.getId()+"")){//不包含3511
+                CacheUtils.putString(context,READ_ARRAY_ID,idArray+newsData.getId()+",");//第一次什么都没有，所以第一个保存的就是3511
+                //刷新适配器
+                adapter.notifyDataSetChanged();
+            }
+            Intent intent=new Intent(context,NewsWebActivity.class);
+            intent.putExtra("url",ConstantUtils.BASE_URL+newsData.getUrl());
+            context.startActivity(intent);
+        }
+
+    }
 }

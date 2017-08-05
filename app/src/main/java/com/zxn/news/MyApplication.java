@@ -2,6 +2,8 @@ package com.zxn.news;
 
 import android.app.Application;
 
+import com.zxn.news.volley.VolleyManager;
+
 import org.xutils.x;
 
 /**
@@ -16,5 +18,7 @@ public final class MyApplication extends Application {
         //初始化xutils3
         x.Ext.setDebug(true);
         x.Ext.init(this);
+        //初始化volley
+        VolleyManager.init(this);
     }
 }

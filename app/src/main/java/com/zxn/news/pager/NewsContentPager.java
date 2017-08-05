@@ -4,6 +4,12 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.zxn.news.activity.MainActivity;
 import com.zxn.news.base.BasePager;
@@ -18,11 +24,13 @@ import com.zxn.news.menudetailpager.TouPiaoMenuDetailPager;
 import com.zxn.news.utils.CacheUtils;
 import com.zxn.news.utils.ConstantUtils;
 import com.zxn.news.utils.LogUtil;
+import com.zxn.news.volley.VolleyManager;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +71,45 @@ public class NewsContentPager extends BasePager {
             parseData(result);
         }
         //联网请求数据，运行两次
-        getDataFromNet();
+//        getDataFromNet();
+        getDataFromNetByVolley();
+    }
+
+    /**
+     * 使用volley联网请求数据
+     */
+    private void getDataFromNetByVolley() {
+        //请求队列，因为已经初始化了volley,所以不用先请求一个消息队列了
+//        RequestQueue queue= Volley.newRequestQueue(context);
+        //String请求
+        StringRequest request=new StringRequest(Request.Method.GET, ConstantUtils.NEWS_CENTER_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String result) {
+                LogUtil.e("使用volley联网请求成功"+result);
+                //数据缓存
+                CacheUtils.putString(context,ConstantUtils.NEWS_CENTER_URL,result);
+                parseData(result);
+                //设置适配器
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                LogUtil.e("使用volley联网请求失败"+volleyError.getMessage());
+            }
+        }){
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String parsed=new String(response.data, "utf-8");
+                    return Response.success(parsed, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                return super.parseNetworkResponse(response);
+            }
+        };
+        //添加到队列中,封装成了单例
+        VolleyManager.getRequestQueue().add(request);
     }
 
     private void getDataFromNet() {

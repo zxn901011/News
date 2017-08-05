@@ -24,15 +24,17 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:25.3.1'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
     compile project(':SlidingMenu_library')
     compile project(':xutils')
-    compile 'com.google.code.gson:gson:2.8.1'
     compile project(':ViewPagerIndicator_library')
     compile files('libs/glide-3.7.0.jar')
     compile project(':RefreshListView_library')
     compile project(':PullToRefresh_library')
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile files('libs/volley.jar')
 }
