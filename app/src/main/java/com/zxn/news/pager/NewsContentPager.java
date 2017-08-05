@@ -4,12 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.zxn.news.activity.MainActivity;
 import com.zxn.news.base.BasePager;
@@ -24,13 +18,11 @@ import com.zxn.news.menudetailpager.TouPiaoMenuDetailPager;
 import com.zxn.news.utils.CacheUtils;
 import com.zxn.news.utils.ConstantUtils;
 import com.zxn.news.utils.LogUtil;
-import com.zxn.news.volley.VolleyManager;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,14 +63,14 @@ public class NewsContentPager extends BasePager {
             parseData(result);
         }
         //联网请求数据，运行两次
-//        getDataFromNet();
-        getDataFromNetByVolley();
+        getDataFromNet();
+//        getDataFromNetByVolley();
     }
 
     /**
      * 使用volley联网请求数据
      */
-    private void getDataFromNetByVolley() {
+    /*private void getDataFromNetByVolley() {
         //请求队列，因为已经初始化了volley,所以不用先请求一个消息队列了
 //        RequestQueue queue= Volley.newRequestQueue(context);
         //String请求
@@ -110,7 +102,7 @@ public class NewsContentPager extends BasePager {
         };
         //添加到队列中,封装成了单例
         VolleyManager.getRequestQueue().add(request);
-    }
+    }*/
 
     private void getDataFromNet() {
         params=new RequestParams(ConstantUtils.NEWS_CENTER_URL);
