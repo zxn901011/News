@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<!--头部刷新-->
     <!--下拉刷新控件-->
     <LinearLayout
         android:id="@+id/ll_pull_down_refresh"
@@ -16,7 +16,7 @@
             android:layout_gravity="center">
             <ImageView
                 android:id="@+id/iv_refresh_image"
-                android:src="@drawable/common_listview_headview_red_arrow"
+                android:src="@drawable/common_listview_headview_red_down_arrow"
                 android:layout_gravity="center"
                 android:paddingLeft="15dp"
                 android:layout_width="wrap_content"
