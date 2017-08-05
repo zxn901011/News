@@ -1,14 +1,14 @@
 [
     {
-        "merged": "E:\\download\\News\\ViewPagerIndicator_library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\news_tab_item_bg_select.9.png",
-        "source": "E:\\download\\News\\ViewPagerIndicator_library\\build\\intermediates\\bundles\\debug\\res\\drawable\\news_tab_item_bg_select.9.png"
+        "merged": "/Users/zhangxuening/androidProject/News/ViewPagerIndicator_library/build/intermediates/res/merged/androidTest/debug/drawable/vpi__tab_indicator.xml",
+        "source": "/Users/zhangxuening/androidProject/News/ViewPagerIndicator_library/build/intermediates/bundles/debug/res/drawable/vpi__tab_indicator.xml"
     },
     {
-        "merged": "E:\\download\\News\\ViewPagerIndicator_library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\vpi__tab_indicator.xml",
-        "source": "E:\\download\\News\\ViewPagerIndicator_library\\build\\intermediates\\bundles\\debug\\res\\drawable\\vpi__tab_indicator.xml"
+        "merged": "/Users/zhangxuening/androidProject/News/ViewPagerIndicator_library/build/intermediates/res/merged/androidTest/debug/drawable/news_tab_item_bg_select.9.png",
+        "source": "/Users/zhangxuening/androidProject/News/ViewPagerIndicator_library/build/intermediates/bundles/debug/res/drawable/news_tab_item_bg_select.9.png"
     },
     {
-        "merged": "E:\\download\\News\\ViewPagerIndicator_library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\vpi__tab_text_color_selector.xml",
-        "source": "E:\\download\\News\\ViewPagerIndicator_library\\build\\intermediates\\bundles\\debug\\res\\drawable\\vpi__tab_text_color_selector.xml"
+        "merged": "/Users/zhangxuening/androidProject/News/ViewPagerIndicator_library/build/intermediates/res/merged/androidTest/debug/drawable/vpi__tab_text_color_selector.xml",
+        "source": "/Users/zhangxuening/androidProject/News/ViewPagerIndicator_library/build/intermediates/bundles/debug/res/drawable/vpi__tab_text_color_selector.xml"
     }
 ]
