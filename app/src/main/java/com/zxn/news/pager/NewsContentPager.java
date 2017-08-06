@@ -145,7 +145,7 @@ public class NewsContentPager extends BasePager {
         menuDetailBasePagers.add(new NewsMenuDetailPager(context,datas.get(0)));
         menuDetailBasePagers.add(new TopicMenuDetailPager(context,datas.get(0)));
         menuDetailBasePagers.add(new PhotosMenuDetailPager(context,datas.get(2)));
-        menuDetailBasePagers.add(new InteractMenuDetailPager(context));
+        menuDetailBasePagers.add(new InteractMenuDetailPager(context,datas.get(2)));
         menuDetailBasePagers.add(new TouPiaoMenuDetailPager(context));
         //给左侧菜单传递数据
         leftMenuFragment.setData(datas);
