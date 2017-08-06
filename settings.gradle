@@ -1,2 +1,2 @@
-include ':app', ':SlidingMenu_library', ':xutils', ':RefreshListView_library', ':PullToRefresh_library', ':AndroidAndJs', ':尚硅谷商城', ':VolleyDemo'
+include ':app', ':SlidingMenu_library', ':xutils', ':RefreshListView_library', ':PullToRefresh_library', ':AndroidAndJs', ':尚硅谷商城', ':VolleyDemo', ':JPushExample(689315)'
 include ':ViewPagerIndicator_library'

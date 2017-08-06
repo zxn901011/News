@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/AndroidAndJs" />
+            <option value="$PROJECT_DIR$/JPushExample(689315)" />
             <option value="$PROJECT_DIR$/PullToRefresh_library" />
             <option value="$PROJECT_DIR$/RefreshListView_library" />
             <option value="$PROJECT_DIR$/SlidingMenu_library" />

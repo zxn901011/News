@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <permission
-        android:name="com.atguigu.beijingnews.permission.JPUSH_MESSAGE"
+        android:name="com.zxn.news.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
 
     <!-- Required  一些系统要求的权限，如访问网络等 -->
