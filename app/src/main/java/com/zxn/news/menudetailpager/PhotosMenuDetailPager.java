@@ -1,25 +1,34 @@
 package com.zxn.news.menudetailpager;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxn.news.R;
+import com.zxn.news.activity.ShowImageActivity;
 import com.zxn.news.base.MenuDetailBasePager;
 import com.zxn.news.bean.NewsBean;
 import com.zxn.news.bean.PhotosMenuDetailPagerBean;
@@ -30,6 +39,8 @@ import com.zxn.news.volley.VolleyManager;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import okhttp3.Call;
 
 /**
  * Created by zxn on 2017-08-02.
@@ -56,6 +67,8 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         View view=View.inflate(context, R.layout.photos_menu_detail_pager,null);
         lv_photos_menu= (ListView) view.findViewById(R.id.lv_photos_menu);
         gv_photos_menu= (GridView) view.findViewById(R.id.gv_photos_menu);
+        lv_photos_menu.setOnItemClickListener(new MyItemClickListener());
+        gv_photos_menu.setOnItemClickListener(new MyItemClickListener());
         return view;
     }
 
@@ -67,7 +80,17 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         if (!TextUtils.isEmpty(saveJson)){
             parseData(saveJson);
         }
-        getDataFromNet();
+        getDataFromNetByOkHttpUtils();
+//        getDataFromNet();
+    }
+
+    private void getDataFromNetByOkHttpUtils() {
+        OkHttpUtils
+                .get()
+                .url(photosUrl)
+                .id(100)
+                .build()
+                .execute(new MyStringCallback());
     }
 
     private void getDataFromNet() {
@@ -148,6 +171,20 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         return new Gson().fromJson(result,PhotosMenuDetailPagerBean.class);
     }
     class MyPhotoListAdapter extends BaseAdapter {
+        private final DisplayImageOptions options;
+
+        public MyPhotoListAdapter(){
+            options = new DisplayImageOptions.Builder()
+                    .showImageOnLoading(R.drawable.home_scroll_default)
+                    .showImageForEmptyUri(R.drawable.home_scroll_default)
+                    .showImageOnFail(R.drawable.home_scroll_default)
+                    .cacheInMemory(true)//缓存在内存中
+                    .cacheOnDisk(true)//缓存在sd卡中
+                    .considerExifParams(true)
+                    .bitmapConfig(Bitmap.Config.RGB_565)
+                    .displayer(new RoundedBitmapDisplayer(15))
+                    .build();
+        }
 
         @Override
         public int getCount() {
@@ -185,7 +222,9 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
 //                    .diskCacheStrategy(DiskCacheStrategy.ALL)
 //                    .into(holder.iv_photos_default_menu);
 
-            loaderImager(holder, imageUrl);
+//            loaderImager(holder, imageUrl);
+            ImageLoader.getInstance().displayImage(imageUrl, holder.iv_photos_default_menu, options);
+
             return convertView;
         }
     }
@@ -193,36 +232,81 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         ImageView iv_photos_default_menu;
         TextView tv_photo_title;
     }
+
+    class MyItemClickListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            PhotosMenuDetailPagerBean.DataEntity.NewsEntity newsData = photoNews.get(position);
+            String imageUrl=ConstantUtils.BASE_URL+newsData.getLargeimage();
+            Intent intent=new Intent(context, ShowImageActivity.class);
+            intent.putExtra("url",imageUrl);
+            context.startActivity(intent);
+        }
+    }
+    class MyStringCallback extends StringCallback {
+
+        @Override
+        public void onBefore(okhttp3.Request request, int id) {}
+
+        @Override
+        public void onAfter(int id) {}
+        @Override
+        public void onError(Call call, Exception e, int id) {
+            e.printStackTrace();
+            LogUtil.e("使用OkHttpUtils请求数据失败==="+e.getMessage());
+        }
+
+        @Override
+        public void onResponse(String response, int id) {
+            LogUtil.e("使用OkHttpUtils请求数据成功====="+response);
+            CacheUtils.putString(context,photosUrl,response);
+            parseData(response);
+            switch (id)
+            {
+                case 100:
+                    Toast.makeText(context, "http", Toast.LENGTH_SHORT).show();
+                    break;
+                case 101:
+                    Toast.makeText(context, "https", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+        @Override
+        public void inProgress(float progress, long total, int id)
+        {
+            LogUtil.e("inProgress:" + progress);
+        }
+    }
     /**
      *
      * @param viewHolder
      * @param imageUrl
      */
-    private void loaderImager(final ViewHolder viewHolder, String imageUrl) {
-        //设置一个tag
-        viewHolder.iv_photos_default_menu.setTag(imageUrl);
-        //直接在这里请求会乱位置
-        ImageLoader.ImageListener listener = new ImageLoader.ImageListener() {
-            @Override
-            public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                if (imageContainer != null) {
-                    if (viewHolder.iv_photos_default_menu != null) {
-                        if (imageContainer.getBitmap() != null) {
-                            //设置图片
-                            viewHolder.iv_photos_default_menu.setImageBitmap(imageContainer.getBitmap());
-                        } else {
-                            //设置默认图片
-                            viewHolder.iv_photos_default_menu.setImageResource(R.drawable.home_scroll_default);
-                        }
-                    }
-                }
-            }
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                //如果出错，则说明都不显示（简单处理），最好准备一张出错图片
-                viewHolder.iv_photos_default_menu.setImageResource(R.drawable.home_scroll_default);
-            }
-        };
-        VolleyManager.getImageLoader().get(imageUrl, listener);
-    }
+//    private void loaderImager(final ViewHolder viewHolder, String imageUrl) {
+//        //设置一个tag
+//        viewHolder.iv_photos_default_menu.setTag(imageUrl);
+//        //直接在这里请求会乱位置
+//        ImageLoader.ImageListener listener = new ImageLoader.ImageListener() {
+//            @Override
+//            public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+//                if (imageContainer != null) {
+//                    if (viewHolder.iv_photos_default_menu != null) {
+//                        if (imageContainer.getBitmap() != null) {
+//                            //设置图片
+//                            viewHolder.iv_photos_default_menu.setImageBitmap(imageContainer.getBitmap());
+//                        } else {
+//                            //设置默认图片
+//                            viewHolder.iv_photos_default_menu.setImageResource(R.drawable.home_scroll_default);
+//                        }
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onErrorResponse(VolleyError volleyError) {
+//                //如果出错，则说明都不显示（简单处理），最好准备一张出错图片
+//                viewHolder.iv_photos_default_menu.setImageResource(R.drawable.home_scroll_default);
+//            }
+//        };
+//        VolleyManager.getImageLoader().get(imageUrl, listener);
+//    }
 }

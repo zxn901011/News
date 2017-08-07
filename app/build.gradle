@@ -37,4 +37,31 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile files('libs/volley.jar')
+    compile files('libs/jcore-android-1.1.6.jar')
+    compile files('libs/jpush-android-3.0.8.jar')
+    compile files('libs/picasso-2.5.2.jar')
+    compile project(':ImageLoader_library')
+    compile project(':photoview')
+    compile project(':okhttputils_library')
+    compile 'com.github.franmontiel:PersistentCookieJar:v0.9.3'
+    compile files('libs/MobCommons-2017.0801.1522.jar')
+    compile files('libs/MobTools-2017.0801.1522.jar')
+    compile files('libs/ShareSDK-Alipay-3.0.1.jar')
+    compile files('libs/ShareSDK-Alipay-Core-3.0.1.jar')
+    compile files('libs/ShareSDK-Alipay-Moments-3.0.1.jar')
+    compile files('libs/ShareSDK-Douban-3.0.1.jar')
+    compile files('libs/ShareSDK-Core-3.0.1.jar')
+    compile files('libs/ShareSDK-QQ-3.0.1.jar')
+    compile files('libs/ShareSDK-QZone-3.0.1.jar')
+    compile files('libs/ShareSDK-Renren-3.0.1.jar')
+    compile files('libs/ShareSDK-SinaWeibo-3.0.1.jar')
+    compile files('libs/ShareSDK-Wechat-3.0.1.jar')
+    compile files('libs/ShareSDK-Wechat-Core-3.0.1.jar')
+    compile files('libs/ShareSDK-Wechat-Favorite-3.0.1.jar')
+    compile files('libs/ShareSDK-Wechat-Moments-3.0.1.jar')
+}
+    allprojects {
+        repositories {
+            maven { url "https://jitpack.io" }
+        }
 }

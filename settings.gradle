@@ -1,2 +1,2 @@
-include ':app', ':SlidingMenu_library', ':xutils', ':RefreshListView_library', ':PullToRefresh_library', ':AndroidAndJs', ':尚硅谷商城', ':VolleyDemo', ':JPushExample(689315)'
+include ':app', ':SlidingMenu_library', ':xutils', ':RefreshListView_library', ':PullToRefresh_library', ':AndroidAndJs', ':尚硅谷商城', ':VolleyDemo', ':JPushExample(689315)', ':ImageLoader_sample', ':ImageLoader_library', ':PhotoView_sample', ':photoview', ':OkHttpSample', ':okhttpserver', ':okhttputils', ':OkHttpUtils_sample', ':sample-okhttp', ':okhttputils_library'
 include ':ViewPagerIndicator_library'

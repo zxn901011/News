@@ -46,7 +46,7 @@ public class BitmapCacheUtils {
         if (memoryCacheUtils!=null){
             Bitmap bitmap =memoryCacheUtils.getBitmapFromUrl(imageUrl);
             if (bitmap!=null){
-                LogUtil.e("本地加载图片成功=="+position);
+                LogUtil.e("内存加载图片成功=="+position);
                 return bitmap;
             }
         }
