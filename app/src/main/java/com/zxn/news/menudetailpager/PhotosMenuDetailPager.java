@@ -3,6 +3,7 @@ package com.zxn.news.menudetailpager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ import com.zxn.news.utils.ConstantUtils;
 import com.zxn.news.utils.LogUtil;
 import com.zxn.news.volley.VolleyManager;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -221,7 +223,6 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
 //                    .load(imageUrl)
 //                    .diskCacheStrategy(DiskCacheStrategy.ALL)
 //                    .into(holder.iv_photos_default_menu);
-
 //            loaderImager(holder, imageUrl);
             ImageLoader.getInstance().displayImage(imageUrl, holder.iv_photos_default_menu, options);
 
@@ -236,10 +237,11 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
     class MyItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            PhotosMenuDetailPagerBean.DataEntity.NewsEntity newsData = photoNews.get(position);
-            String imageUrl=ConstantUtils.BASE_URL+newsData.getLargeimage();
             Intent intent=new Intent(context, ShowImageActivity.class);
-            intent.putExtra("url",imageUrl);
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("photoNews", (Serializable) photoNews);
+            intent.putExtras(bundle);
+            intent.putExtra("position",position);
             context.startActivity(intent);
         }
     }

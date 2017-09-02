@@ -37,7 +37,7 @@ public class MainActivity extends SlidingFragmentActivity {
     }
 
     private void initMenu() {
-        SlidingMenu slidingMenu=getSlidingMenu();//获取一个slidingmenu对象，用getSlidingMenu()!!!!!
+        SlidingMenu slidingMenu=getSlidingMenu();//获取一个slidingmenu对象，用getSlidingMenu()!!!!
         //1.设置主页面
         setContentView(R.layout.activity_main);
         //2.设置左侧菜单,只要是左侧菜单，都要用帧布局

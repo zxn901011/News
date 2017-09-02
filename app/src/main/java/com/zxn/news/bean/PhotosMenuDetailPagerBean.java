@@ -1,12 +1,13 @@
 package com.zxn.news.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by zxn on 2017-08-05.
  */
 
-public class PhotosMenuDetailPagerBean {
+public class PhotosMenuDetailPagerBean implements Serializable{
 
     /**
      * retcode : 200
@@ -31,7 +32,7 @@ public class PhotosMenuDetailPagerBean {
     public void setData(DataEntity data) {
         this.data = data;
     }
-    public static class DataEntity {
+    public static class DataEntity implements Serializable{
         /**
          * title : 组图
          * topic : []
@@ -86,7 +87,7 @@ public class PhotosMenuDetailPagerBean {
             this.news = news;
         }
 
-        public static class NewsEntity {
+        public static class NewsEntity implements Serializable{
             /**
              * id : 147265
              * title : 广州93岁肌肉“型爷”走红
@@ -100,7 +101,6 @@ public class PhotosMenuDetailPagerBean {
              * type : news
              * commentlist : /static/api/news/10003/65/147265/comment_1.json
              */
-
             private int id;
             private String title;
             private String url;
